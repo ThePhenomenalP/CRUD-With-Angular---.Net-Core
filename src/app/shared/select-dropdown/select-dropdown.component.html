@@ -1,0 +1,15 @@
+<label class="form-label">{{ label }}</label>
+<select class="form-select" [formControl]="control">
+  <option selected>Choose Item</option>
+  <option *ngFor="let item of dropdownItems">
+    {{ item }}
+  </option>
+</select>
+<ng-container *ngIf="control.touched">
+  <div
+    style="color: red; font-size: small"
+    *ngIf="control.hasError('NotSelected')"
+  >
+    This Select Dropdown shouldn't be empty
+  </div>
+</ng-container>

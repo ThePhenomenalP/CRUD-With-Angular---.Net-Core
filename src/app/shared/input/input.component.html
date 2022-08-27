@@ -1,0 +1,12 @@
+<label class="form-label">{{ label }}</label>
+<input
+  [class]="inputClass"
+  [type]="type"
+  [formControl]="control"
+  [placeholder]="placeHolder"
+/>
+<ng-container *ngIf="control.dirty && control.errors">
+  <div class="showError" *ngIf="control.hasError('required')">
+    This input shouldn't be empty
+  </div>
+</ng-container>

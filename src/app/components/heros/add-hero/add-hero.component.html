@@ -1,0 +1,50 @@
+<div class="container mt-4">
+  <form class="row g-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h2>Add New Hero</h2>
+
+    <div class="col-md-6">
+      <app-input
+        [control]="$any(form).get('name')"
+        [label]="'Hero Name'"
+        [placeHolder]="'Enter Hero Name'"
+      ></app-input>
+    </div>
+    <div class="col-md-6">
+      <app-input
+        [control]="$any(form).get('initialMovementSpeed')"
+        [label]="'Initial Movement Speed'"
+        [placeHolder]="'Enter Hero Initial Movement Speed'"
+      ></app-input>
+    </div>
+    <div class="col-md-6">
+      <app-select-dropdown
+        [control]="$any(form).get('category')"
+        [dropdownItems]="['Strength', 'Agility', 'Intelligence']"
+        [label]="'Select Hero Category'"
+      ></app-select-dropdown>
+    </div>
+    <div class="col-md-6">
+      <app-select-dropdown
+        [control]="$any(form).get('type')"
+        [dropdownItems]="['Carry', 'Tank', 'Support']"
+        [label]="'Select Hero Type'"
+      ></app-select-dropdown>
+    </div>
+    <div class="col-md-12">
+      <app-input
+        [control]="$any(form).get('description')"
+        [label]="'Description'"
+        [placeHolder]="'Enter about Hero description'"
+      ></app-input>
+    </div>
+    <app-checkbox
+      [control]="$any(form).get('isPopular')"
+      [label]="' Is Hero Popular? '"
+    ></app-checkbox>
+    <div class="col-12">
+      <button [disabled]="form.invalid" type="submit" class="btn btn-primary">
+        Add Hero
+      </button>
+    </div>
+  </form>
+</div>
