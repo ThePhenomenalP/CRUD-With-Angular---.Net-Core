@@ -1,3 +1,4 @@
+import { AlertHttpInterceptor } from './_interceptor/alert-http.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,9 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeroListComponent } from './components/heros/hero-list/hero-list.component';
 import { AddHeroComponent } from './components/heros/add-hero/add-hero.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HeroFormComponent } from './components/heros/hero-form/hero-form.component';
 
 @NgModule({
-  declarations: [AppComponent, HeroListComponent, AddHeroComponent],
+  declarations: [AppComponent, HeroListComponent, AddHeroComponent, HeroFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,7 +21,9 @@ import { AddHeroComponent } from './components/heros/add-hero/add-hero.component
     SharedModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AlertHttpInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

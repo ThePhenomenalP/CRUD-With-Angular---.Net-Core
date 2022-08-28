@@ -1,9 +1,19 @@
 <label class="form-label">{{ label }}</label>
 <select class="form-select" [formControl]="control">
-  <option selected>Choose Item</option>
-  <option *ngFor="let item of dropdownItems">
-    {{ item }}
-  </option>
+  <ng-container *ngIf="forEdit; else register">
+    <option selected>{{ control.value }}</option>
+    <ng-container *ngFor="let item of dropdownItems">
+      <option *ngIf="item !== control.value">
+        {{ item }}
+      </option>
+    </ng-container>
+  </ng-container>
+  <ng-template #register>
+    <option selected>Choose Item</option>
+    <option *ngFor="let item of dropdownItems">
+      {{ item }}
+    </option>
+  </ng-template>
 </select>
 <ng-container *ngIf="control.touched">
   <div

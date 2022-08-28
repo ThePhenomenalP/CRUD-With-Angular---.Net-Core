@@ -10,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class HeroListComponent implements OnInit {
   // Intelligence
   heroList: hero[];
+  showModal: boolean = false;
+  Hero: hero;
 
   constructor(private api: HeroService) {}
 
@@ -22,5 +24,18 @@ export class HeroListComponent implements OnInit {
         console.log(response);
       },
     });
+  }
+
+  onClick(Id, n, c, t, i, is, d) {
+    this.showModal = true;
+    this.Hero = {
+      id: Id,
+      name: n,
+      category: c,
+      type: t,
+      initialMovementSpeed: i,
+      isPopular: is,
+      description: d,
+    };
   }
 }

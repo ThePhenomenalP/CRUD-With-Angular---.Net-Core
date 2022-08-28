@@ -5,12 +5,12 @@ import { HeroListComponent } from './hero-list.component';
 describe('HeroListComponent', () => {
   let component: HeroListComponent;
   let fixture: ComponentFixture<HeroListComponent>;
+  let closeModal: boolean = false;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeroListComponent ]
-    })
-    .compileComponents();
+      declarations: [HeroListComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HeroListComponent);
     component = fixture.componentInstance;

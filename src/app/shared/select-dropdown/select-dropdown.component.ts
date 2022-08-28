@@ -10,6 +10,7 @@ export class SelectDropdownComponent implements OnInit {
   @Input() control: FormControl;
   @Input() dropdownItems: string[];
   @Input() label: string;
+  @Input() forEdit: boolean = false;
   // @Input() dropdownSize: string = 'col-md-4';
   constructor() {}
 

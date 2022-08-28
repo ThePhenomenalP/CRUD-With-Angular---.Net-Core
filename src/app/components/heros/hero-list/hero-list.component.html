@@ -14,6 +14,7 @@
         <th scope="col">Initial Movement Speed</th>
         <th scope="col">Is Hero Papular?</th>
         <th scope="col">Description</th>
+        <th scope="col">Options</th>
       </tr>
     </thead>
     <tbody>
@@ -26,6 +27,25 @@
         <td *ngIf="item.isPopular">Yes</td>
         <td *ngIf="!item.isPopular">No</td>
         <td>{{ item.description }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="
+              onClick(
+                item.id,
+                item.name,
+                item.category,
+                item.type,
+                item.initialMovementSpeed,
+                item.isPopular,
+                item.description
+              )
+            "
+          >
+            Edit
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -34,4 +54,12 @@
       No Heros Found
     </p>
   </ng-template>
+  <app-modal
+    [title]="'Add hero'"
+    [footer]="false"
+    (close)="showModal = false"
+    *ngIf="showModal"
+  >
+    <app-hero-form [heroDetails]="Hero"></app-hero-form>
+  </app-modal>
 </div>
