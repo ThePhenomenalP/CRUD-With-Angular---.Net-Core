@@ -18,4 +18,16 @@ export class HeroService {
   AddNewHero(newHero: hero) {
     return this.http.post(this.baseApiUrl + '/api/Heros', newHero);
   }
+
+  updateHero(newHeroDetails: hero): Observable<hero> {
+    return this.http.put<hero>(this.baseApiUrl + '/api/Heros', newHeroDetails);
+  }
+
+  deleteHero(id: string) {
+    return this.http.delete(this.baseApiUrl + '/api/Heros/' + id);
+  }
+
+  searchForHero(heroName: string): Observable<hero[]> {
+    return this.http.get<hero[]>(this.baseApiUrl + '/api/Heros/' + heroName);
+  }
 }

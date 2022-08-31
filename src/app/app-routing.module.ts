@@ -1,3 +1,4 @@
+import { LoginComponent } from './components/auth/login/login.component';
 import { AddHeroComponent } from './components/heros/add-hero/add-hero.component';
 import { HeroListComponent } from './components/heros/hero-list/hero-list.component';
 import { NgModule } from '@angular/core';
@@ -7,6 +8,7 @@ const routes: Routes = [
   { path: '', component: HeroListComponent },
   { path: 'heros', component: HeroListComponent },
   { path: 'addHero', component: AddHeroComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

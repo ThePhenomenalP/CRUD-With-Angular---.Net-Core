@@ -1,11 +1,5 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { HeroService } from 'src/app/services/hero.service';
 
 @Component({
   selector: 'app-modal',
@@ -17,18 +11,26 @@ export class ModalComponent implements OnInit {
   @Input() btnTitle: string;
   @Input() footer: boolean = true;
   @Input() title: string;
+  @Input() heroId: string;
   @Output() close = new EventEmitter();
-  constructor(private er: ElementRef) {}
+  @Output() deleteRow = new EventEmitter();
+  constructor(private api: HeroService) {}
 
-  ngOnInit(): void {
-    // document.body.appendChild(this.er.nativeElement);
-  }
-
-  ngOnDestroy(): void {
-    // this.er.nativeElement.remove();
-  }
+  ngOnInit(): void {}
 
   onClose() {
     this.close.emit();
+  }
+
+  onBtnClick() {
+    this.api.deleteHero(this.heroId).subscribe({
+      next: () => {
+        this.deleteRow.emit();
+        this.close.emit();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

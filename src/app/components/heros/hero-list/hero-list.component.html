@@ -2,64 +2,330 @@
   <h1 class="mb-2">Heros</h1>
 
   <table
-    class="table table-dark table-hover table-striped"
+    class="table table-dark table-hover table-striped table-sm"
     *ngIf="heroList; else notFound"
   >
-    <thead>
+    <thead class="table-dark">
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Hero Name</th>
-        <th scope="col">Hero Category</th>
-        <th scope="col">Hero Type</th>
-        <th scope="col">Initial Movement Speed</th>
-        <th scope="col">Is Hero Papular?</th>
-        <th scope="col">Description</th>
-        <th scope="col">Options</th>
+        <td colspan="8" class="table-active">
+          <div class="container-fluid d-flex m-1">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search For Hero Name"
+              aria-label="Search"
+              (change)="heroName = $any($event.target).value"
+            />
+            <button
+              class="btn btn-outline-success"
+              type="button"
+              (click)="search()"
+            >
+              Search
+            </button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="col" style="padding-bottom: 9px">#</th>
+        <th scope="col">
+          Hero Name
+          <button (click)="sortResults('name', sortingASC)" class="btn btn-sm">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-arrow-down-up"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"
+              />
+            </svg>
+          </button>
+        </th>
+        <th scope="col">
+          Hero Category<button
+            (click)="sortResults('category', sortingASC)"
+            class="btn btn-sm"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-arrow-down-up"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"
+              />
+            </svg>
+          </button>
+        </th>
+        <th scope="col">
+          Hero Type
+          <button (click)="sortResults('type', sortingASC)" class="btn btn-sm">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-arrow-down-up"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"
+              />
+            </svg>
+          </button>
+        </th>
+        <th scope="col">
+          Initial Movement Speed
+          <button
+            (click)="sortResults('initialMovementSpeed', sortingASC)"
+            class="btn btn-sm"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-arrow-down-up"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"
+              />
+            </svg>
+          </button>
+        </th>
+        <th scope="col">
+          Is Hero Papular?
+          <button
+            (click)="sortResults('isPopular', sortingASC)"
+            class="btn btn-sm"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-arrow-down-up"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"
+              />
+            </svg>
+          </button>
+        </th>
+        <th scope="col">
+          Description
+          <button
+            (click)="sortResults('description', sortingASC)"
+            class="btn btn-sm"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-arrow-down-up"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"
+              />
+            </svg>
+          </button>
+        </th>
+        <th scope="col" style="padding-bottom: 9px">Options</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of heroList; let i = index">
-        <th scope="row">{{ i + 1 }}</th>
-        <td>{{ item.name }}</td>
-        <td>{{ item.category }}</td>
-        <td>{{ item.type }}</td>
-        <td>{{ item.initialMovementSpeed }}</td>
-        <td *ngIf="item.isPopular">Yes</td>
-        <td *ngIf="!item.isPopular">No</td>
-        <td>{{ item.description }}</td>
-        <td>
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="
-              onClick(
-                item.id,
-                item.name,
-                item.category,
-                item.type,
-                item.initialMovementSpeed,
-                item.isPopular,
-                item.description
-              )
-            "
-          >
-            Edit
-          </button>
-        </td>
+      <tr
+        *ngFor="
+          let item of heroList
+            | paginate: { itemsPerPage: 5, currentPage: CurrentPage };
+          let i = index
+        "
+      >
+        <ng-container *ngIf="item.id !== NHD.id; else editedRow">
+          <ng-container *ngIf="item.id != deletedRow">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.initialMovementSpeed }}</td>
+            <td *ngIf="item.isPopular">Yes</td>
+            <td *ngIf="!item.isPopular">No</td>
+            <td>{{ item.description }}</td>
+            <td>
+              <button
+                style="margin-right: 5px"
+                type="button"
+                class="btn btn-primary"
+                (click)="
+                  onClick(
+                    item.id,
+                    item.name,
+                    item.category,
+                    item.type,
+                    item.initialMovementSpeed,
+                    item.isPopular,
+                    item.description
+                  )
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-pencil-square"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="deleteHero(item.id, item.name)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-trash-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                  />
+                </svg>
+              </button>
+            </td>
+          </ng-container>
+        </ng-container>
+        <ng-template #editedRow>
+          <ng-container *ngIf="item.id != deletedRow">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ NHD.name }}</td>
+            <td>{{ NHD.category }}</td>
+            <td>{{ NHD.type }}</td>
+            <td>{{ NHD.initialMovementSpeed }}</td>
+            <td *ngIf="NHD.isPopular">Yes</td>
+            <td *ngIf="!NHD.isPopular">No</td>
+            <td>{{ NHD.description }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="
+                  onClick(
+                    NHD.id,
+                    NHD.name,
+                    NHD.category,
+                    NHD.type,
+                    NHD.initialMovementSpeed,
+                    NHD.isPopular,
+                    NHD.description
+                  )
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-pencil-square"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="deleteHero(NHD.id, NHD.name)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-trash-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                  />
+                </svg>
+              </button>
+            </td>
+          </ng-container>
+        </ng-template>
       </tr>
     </tbody>
   </table>
+
+  <pagination-controls
+    class="float-end"
+    (pageChange)="CurrentPage = $event"
+  ></pagination-controls>
+
   <ng-template #notFound>
     <p style="font-weight: bold; text-align: center; font-size: larger">
       No Heros Found
     </p>
   </ng-template>
+
+  <!-- Edit Modal -->
   <app-modal
-    [title]="'Add hero'"
+    [title]="'Edit Hero Details'"
     [footer]="false"
     (close)="showModal = false"
     *ngIf="showModal"
   >
-    <app-hero-form [heroDetails]="Hero"></app-hero-form>
+    <app-hero-form
+      [heroDetails]="Hero"
+      (refreshData)="reloadData($event)"
+      (close)="showModal = false"
+    ></app-hero-form>
+  </app-modal>
+
+  <!-- Delete Modal -->
+  <app-modal
+    [title]="'Delete Hero Details'"
+    [footer]="true"
+    (close)="showModal2 = false"
+    *ngIf="showModal2"
+    [btnTitle]="'Delete'"
+    [heroId]="deletedHeroId"
+    (deleteRow)="this.deletedRow = deletedHeroId"
+  >
+    Are you sure you want to delete "{{ deletedHeroName }}" hero?
   </app-modal>
 </div>

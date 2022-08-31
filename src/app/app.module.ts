@@ -11,15 +11,24 @@ import { HeroListComponent } from './components/heros/hero-list/hero-list.compon
 import { AddHeroComponent } from './components/heros/add-hero/add-hero.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeroFormComponent } from './components/heros/hero-form/hero-form.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { LoginComponent } from './components/auth/login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, HeroListComponent, AddHeroComponent, HeroFormComponent],
+  declarations: [
+    AppComponent,
+    HeroListComponent,
+    AddHeroComponent,
+    HeroFormComponent,
+    LoginComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AlertHttpInterceptor, multi: true },

@@ -1,5 +1,6 @@
+import { HeroService } from './../../../services/hero.service';
 import { hero } from './../../../models/heros.model';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DropdownService } from './../../../_validators/dropdown.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -10,8 +11,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class HeroFormComponent implements OnInit {
   @Input() heroDetails?: hero;
+  @Output() refreshData = new EventEmitter();
+  @Output() close = new EventEmitter();
   form: FormGroup;
-  constructor(private customValidator: DropdownService) {}
+  constructor(
+    private customValidator: DropdownService,
+    private Api: HeroService
+  ) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -36,6 +42,11 @@ export class HeroFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    this.Api.updateHero(this.form.value).subscribe({
+      next: (response) => {
+        this.refreshData.emit(response);
+        this.close.emit();
+      },
+    });
   }
 }

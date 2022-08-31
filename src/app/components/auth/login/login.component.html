@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <form class="row g-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h2>Login</h2>
+
+    <div class="col-md-6">
+      <app-input
+        [control]="$any(form).get('username')"
+        [label]="'Username'"
+        [placeHolder]="'Enter Your Username'"
+      ></app-input>
+    </div>
+    <div class="col-md-6">
+      <app-input
+        [control]="$any(form).get('password')"
+        [label]="'Password'"
+        [placeHolder]="'Enter Your Password'"
+        [type]="'password'"
+      ></app-input>
+    </div>
+    <div class="col-12">
+      <button [disabled]="form.invalid" type="submit" class="btn btn-primary">
+        Login
+      </button>
+    </div>
+  </form>
+  <div
+    class="alert alert-success alert-dismissible fade show"
+    role="alert"
+    [ngClass]="success == false ? 'alert-danger' : 'alert-success'"
+    *ngIf="showAlert"
+  >
+    <div>{{ alertText }}</div>
+    <button
+      (click)="showAlert = false"
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+</div>

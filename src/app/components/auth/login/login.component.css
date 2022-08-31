@@ -1,0 +1,11 @@
+.alert {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  right: 10px;
+  width: 350px;
+}
+.btn-close {
+  position: absolute;
+  right: 10px !important;
+}

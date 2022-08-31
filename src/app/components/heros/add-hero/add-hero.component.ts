@@ -32,7 +32,7 @@ export class AddHeroComponent implements OnInit {
     }
     this.api.AddNewHero(this.form.value).subscribe({
       next: () => {
-        this.route.navigate(['/Heros']);
+        this.route.navigate(['/heros']);
       },
     });
   }

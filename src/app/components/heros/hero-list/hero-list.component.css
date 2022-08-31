@@ -1,0 +1,9 @@
+.btn-sm {
+  --bs-btn-padding-y: 0rem;
+  --bs-btn-padding-x: 0rem;
+  --bs-btn-font-size: 1rem;
+  /* --bs-btn-font-
+  font */
+  padding-bottom: 5px;
+  color: white;
+}
