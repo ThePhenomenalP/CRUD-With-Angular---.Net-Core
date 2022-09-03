@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,12 +11,16 @@ import { user } from 'src/app/models/users.model';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private api: AuthService, private route: Router) {}
+  constructor(
+    private api: AuthService,
+    private route: Router,
+    private cookie: CookieService
+  ) {}
   alertText: string;
   showAlert: boolean = false;
   success: boolean;
   userDetails: user;
-  signedIn: boolean;
+  signedIn: string;
 
   form = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -23,15 +28,8 @@ export class LoginComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.api.signedIn$.subscribe({
-      next: (response) => {
-        this.signedIn = response;
-        console.log(response);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    //! Get Cookie Value
+    this.signedIn = this.cookie.get('signedIn');
   }
 
   onSubmit() {
@@ -42,16 +40,20 @@ export class LoginComponent implements OnInit {
           this.success = true;
           this.showAlert = true;
           this.alertText = 'Login successful';
+          //! Set Cookie
+          this.cookie.set('signedIn', 'true');
           setTimeout(() => {
             this.showAlert = false;
-          }, 2700);
-          setTimeout(() => {
+            this.api.signedIn$.next('true');
             this.route.navigate(['/heros']);
           }, 3000);
         } else {
           this.success = false;
           this.showAlert = true;
           this.alertText = 'Your username or password is wrong';
+          //! Set Cookie
+          this.cookie.set('signedIn', 'false');
+          this.api.signedIn$.next('false');
           setTimeout(() => {
             this.showAlert = false;
           }, 5500);

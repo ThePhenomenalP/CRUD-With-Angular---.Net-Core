@@ -9,26 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hero-list.component.css'],
 })
 export class HeroListComponent implements OnInit {
-  // Intelligence
   CurrentPage: any;
   deletedHeroId: string;
   deletedHeroName: string;
-  deletedRow: string;
   Hero: hero;
   heroList: hero[];
   heroName: string;
   showModal: boolean = false;
   showModal2: boolean = false;
   sortingASC: boolean = false;
-  NHD: hero = {
-    id: 'z',
-    name: '',
-    category: '',
-    type: '',
-    initialMovementSpeed: '',
-    isPopular: false,
-    description: '',
-  };
 
   constructor(private api: HeroService, private route: Router) {}
 
@@ -36,6 +25,7 @@ export class HeroListComponent implements OnInit {
     this.api.getAllHeros().subscribe({
       next: (data) => {
         this.heroList = data;
+        console.log(data);
       },
       error: (response) => {
         console.log(response);
@@ -43,7 +33,7 @@ export class HeroListComponent implements OnInit {
     });
   }
 
-  onClick(Id, n, c, t, i, is, d) {
+  onClick(Id, n, c, t, i, is, d, image) {
     this.showModal = true;
     this.Hero = {
       id: Id,
@@ -53,11 +43,8 @@ export class HeroListComponent implements OnInit {
       initialMovementSpeed: i,
       isPopular: is,
       description: d,
+      imageName: image,
     };
-  }
-
-  reloadData(newHeroDetail: hero) {
-    this.NHD = newHeroDetail;
   }
 
   deleteHero(id: string, name: string) {
@@ -85,6 +72,14 @@ export class HeroListComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
+      },
+    });
+  }
+
+  refreshTable() {
+    this.api.getAllHeros().subscribe({
+      next: (data) => {
+        this.heroList = data;
       },
     });
   }

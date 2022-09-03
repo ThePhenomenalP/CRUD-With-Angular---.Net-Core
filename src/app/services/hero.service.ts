@@ -15,12 +15,15 @@ export class HeroService {
     return this.http.get<hero[]>(this.baseApiUrl + '/api/Heros');
   }
 
-  AddNewHero(newHero: hero) {
+  AddNewHero(newHero: FormData) {
     return this.http.post(this.baseApiUrl + '/api/Heros', newHero);
   }
 
-  updateHero(newHeroDetails: hero): Observable<hero> {
-    return this.http.put<hero>(this.baseApiUrl + '/api/Heros', newHeroDetails);
+  updateHero(id: string, newHeroDetails: FormData): Observable<hero> {
+    return this.http.put<hero>(
+      this.baseApiUrl + '/api/Heros/' + id,
+      newHeroDetails
+    );
   }
 
   deleteHero(id: string) {
@@ -29,5 +32,9 @@ export class HeroService {
 
   searchForHero(heroName: string): Observable<hero[]> {
     return this.http.get<hero[]>(this.baseApiUrl + '/api/Heros/' + heroName);
+  }
+
+  uploadImage(Image: FormData) {
+    return this.http.post(this.baseApiUrl + '/api/Heros/uploadImage', Image);
   }
 }

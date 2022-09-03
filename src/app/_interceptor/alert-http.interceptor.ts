@@ -17,6 +17,9 @@ export class AlertHttpInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    // const modifyRequest = request.clone({
+    //   withCredentials: true,
+    // });
     return next.handle(request).pipe(
       tap((value) => {
         if (value.type == HttpEventType.Sent) {

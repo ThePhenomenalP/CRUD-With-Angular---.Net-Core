@@ -12,6 +12,7 @@ export class ModalComponent implements OnInit {
   @Input() footer: boolean = true;
   @Input() title: string;
   @Input() heroId: string;
+  @Input() modalSize: string = 'modal-lg';
   @Output() close = new EventEmitter();
   @Output() deleteRow = new EventEmitter();
   constructor(private api: HeroService) {}

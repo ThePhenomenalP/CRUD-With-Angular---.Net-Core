@@ -7,7 +7,7 @@
   >
     <thead class="table-dark">
       <tr>
-        <td colspan="8" class="table-active">
+        <td colspan="9" class="table-active">
           <div class="container-fluid d-flex m-1">
             <input
               class="form-control me-2"
@@ -147,6 +147,7 @@
             </svg>
           </button>
         </th>
+        <th scope="col" style="padding-bottom: 9px">Hero Image</th>
         <th scope="col" style="padding-bottom: 9px">Options</th>
       </tr>
     </thead>
@@ -158,135 +159,75 @@
           let i = index
         "
       >
-        <ng-container *ngIf="item.id !== NHD.id; else editedRow">
-          <ng-container *ngIf="item.id != deletedRow">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ item.name }}</td>
-            <td>{{ item.category }}</td>
-            <td>{{ item.type }}</td>
-            <td>{{ item.initialMovementSpeed }}</td>
-            <td *ngIf="item.isPopular">Yes</td>
-            <td *ngIf="!item.isPopular">No</td>
-            <td>{{ item.description }}</td>
-            <td>
-              <button
-                style="margin-right: 5px"
-                type="button"
-                class="btn btn-primary"
-                (click)="
-                  onClick(
-                    item.id,
-                    item.name,
-                    item.category,
-                    item.type,
-                    item.initialMovementSpeed,
-                    item.isPopular,
-                    item.description
-                  )
-                "
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-pencil-square"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                  />
-                </svg>
-              </button>
-              <button
-                type="button"
-                class="btn btn-danger"
-                (click)="deleteHero(item.id, item.name)"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-trash-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
-                  />
-                </svg>
-              </button>
-            </td>
-          </ng-container>
-        </ng-container>
-        <ng-template #editedRow>
-          <ng-container *ngIf="item.id != deletedRow">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ NHD.name }}</td>
-            <td>{{ NHD.category }}</td>
-            <td>{{ NHD.type }}</td>
-            <td>{{ NHD.initialMovementSpeed }}</td>
-            <td *ngIf="NHD.isPopular">Yes</td>
-            <td *ngIf="!NHD.isPopular">No</td>
-            <td>{{ NHD.description }}</td>
-            <td>
-              <button
-                type="button"
-                class="btn btn-primary"
-                (click)="
-                  onClick(
-                    NHD.id,
-                    NHD.name,
-                    NHD.category,
-                    NHD.type,
-                    NHD.initialMovementSpeed,
-                    NHD.isPopular,
-                    NHD.description
-                  )
-                "
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-pencil-square"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                  />
-                </svg>
-              </button>
-              <button
-                type="button"
-                class="btn btn-danger"
-                (click)="deleteHero(NHD.id, NHD.name)"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-trash-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
-                  />
-                </svg>
-              </button>
-            </td>
-          </ng-container>
-        </ng-template>
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.type }}</td>
+        <td>{{ item.initialMovementSpeed }}</td>
+        <td *ngIf="item.isPopular">Yes</td>
+        <td *ngIf="!item.isPopular">No</td>
+        <td>{{ item.description }}</td>
+        <td>
+          <img
+            [src]="'https://localhost:7279/images/' + item.imageName"
+            alt="Hero Image"
+            style="width: 75px; height: 75px; border-radius: 50%"
+          />
+        </td>
+        <td>
+          <button
+            style="margin-right: 5px"
+            type="button"
+            class="btn btn-primary"
+            (click)="
+              onClick(
+                item.id,
+                item.name,
+                item.category,
+                item.type,
+                item.initialMovementSpeed,
+                item.isPopular,
+                item.description,
+                item.imageName
+              )
+            "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-pencil-square"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteHero(item.id, item.name)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-trash-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+              />
+            </svg>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -306,12 +247,14 @@
   <app-modal
     [title]="'Edit Hero Details'"
     [footer]="false"
+    [modalSize]="'modal-xl'"
     (close)="showModal = false"
     *ngIf="showModal"
   >
     <app-hero-form
       [heroDetails]="Hero"
-      (refreshData)="reloadData($event)"
+      [btnTitle]="' Edit '"
+      (refreshData)="refreshTable()"
       (close)="showModal = false"
     ></app-hero-form>
   </app-modal>
@@ -324,7 +267,7 @@
     *ngIf="showModal2"
     [btnTitle]="'Delete'"
     [heroId]="deletedHeroId"
-    (deleteRow)="this.deletedRow = deletedHeroId"
+    (deleteRow)="refreshTable()"
   >
     Are you sure you want to delete "{{ deletedHeroName }}" hero?
   </app-modal>

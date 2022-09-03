@@ -6,4 +6,5 @@ export interface hero {
   initialMovementSpeed?: string;
   isPopular?: boolean;
   description?: string;
+  imageName?: any;
 }

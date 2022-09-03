@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { AlertHttpInterceptor } from './_interceptor/alert-http.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
@@ -31,6 +32,7 @@ import { LoginComponent } from './components/auth/login/login.component';
     NgxPaginationModule,
   ],
   providers: [
+    CookieService,
     { provide: HTTP_INTERCEPTORS, useClass: AlertHttpInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

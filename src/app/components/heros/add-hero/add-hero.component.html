@@ -1,47 +1,68 @@
-<div class="container mt-4">
-  <form class="row g-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="container mt-4" *ngIf="signedIn == 'true'; else shouldSignIn">
+  <form
+    class="row align-items-center g-3"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+  >
     <h2>Add New Hero</h2>
-
-    <div class="col-md-6">
-      <app-input
-        [control]="$any(form).get('name')"
-        [label]="'Hero Name'"
-        [placeHolder]="'Enter Hero Name'"
-      ></app-input>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-6">
+          <app-input
+            [control]="$any(form).get('name')"
+            [label]="'Hero Name'"
+            [placeHolder]="'Enter Hero Name'"
+          ></app-input>
+        </div>
+        <div class="col-md-6">
+          <app-input
+            [control]="$any(form).get('initialMovementSpeed')"
+            [label]="'Initial Movement Speed'"
+            [placeHolder]="'Enter Hero Initial Movement Speed'"
+            [type]="'number'"
+          ></app-input>
+        </div>
+        <div class="col-md-6">
+          <app-select-dropdown
+            [control]="$any(form).get('category')"
+            [dropdownItems]="['Strength', 'Agility', 'Intelligence']"
+            [label]="'Select Hero Category'"
+          ></app-select-dropdown>
+        </div>
+        <div class="col-md-6">
+          <app-select-dropdown
+            [control]="$any(form).get('type')"
+            [dropdownItems]="['Carry', 'Tank', 'Support']"
+            [label]="'Select Hero Type'"
+          ></app-select-dropdown>
+        </div>
+        <div class="col-md-12">
+          <app-input
+            [control]="$any(form).get('description')"
+            [label]="'Description'"
+            [placeHolder]="'Enter about Hero description'"
+          ></app-input>
+        </div>
+        <app-checkbox
+          [control]="$any(form).get('isPopular')"
+          [label]="' Is Hero Popular? '"
+        ></app-checkbox>
+      </div>
     </div>
-    <div class="col-md-6">
-      <app-input
-        [control]="$any(form).get('initialMovementSpeed')"
-        [label]="'Initial Movement Speed'"
-        [placeHolder]="'Enter Hero Initial Movement Speed'"
-        [type]="'number'"
-      ></app-input>
+    <div class="col-md-4">
+      <div class="col-md-12">
+        <img
+          [src]="'https://localhost:7279/images/' + imageName"
+          alt="Heros Image PlaceHolder"
+          style="border-radius: 5px"
+          class="col-12"
+        />
+      </div>
+      <div class="col-md-12">
+        <label class="form-label">Select Image For Hero</label>
+        <input class="form-control" type="file" (change)="uploadFile($event)" />
+      </div>
     </div>
-    <div class="col-md-6">
-      <app-select-dropdown
-        [control]="$any(form).get('category')"
-        [dropdownItems]="['Strength', 'Agility', 'Intelligence']"
-        [label]="'Select Hero Category'"
-      ></app-select-dropdown>
-    </div>
-    <div class="col-md-6">
-      <app-select-dropdown
-        [control]="$any(form).get('type')"
-        [dropdownItems]="['Carry', 'Tank', 'Support']"
-        [label]="'Select Hero Type'"
-      ></app-select-dropdown>
-    </div>
-    <div class="col-md-12">
-      <app-input
-        [control]="$any(form).get('description')"
-        [label]="'Description'"
-        [placeHolder]="'Enter about Hero description'"
-      ></app-input>
-    </div>
-    <app-checkbox
-      [control]="$any(form).get('isPopular')"
-      [label]="' Is Hero Popular? '"
-    ></app-checkbox>
     <div class="col-12">
       <button [disabled]="form.invalid" type="submit" class="btn btn-primary">
         Add Hero
@@ -49,3 +70,18 @@
     </div>
   </form>
 </div>
+
+<ng-template #shouldSignIn>
+  <div class="container mt-4">
+    <p
+      style="
+        text-align: center;
+        font-size: 20px;
+        font-weight: bolder;
+        margin-top: 75px;
+      "
+    >
+      You Should First Login Then You Cant Add New Heros
+    </p>
+  </div>
+</ng-template>
