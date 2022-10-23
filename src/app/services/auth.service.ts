@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl: string = environment.baseApiUrl;
+  baseUrl: string ='https://localhost:7279';
   public signedIn$ = new BehaviorSubject<string>('false');
   constructor(private http: HttpClient, private cookie: CookieService) {}
 
