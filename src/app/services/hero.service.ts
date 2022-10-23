@@ -8,33 +8,33 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class HeroService {
-  baseApiUrl: string = environment.baseApiUrl;
+  baseUrl : string = "https://localhost:7279";
   constructor(private http: HttpClient) {}
 
   getAllHeros(): Observable<hero[]> {
-    return this.http.get<hero[]>(this.baseApiUrl + '/api/Heros');
+    return this.http.get<hero[]>(this.baseUrl + '/api/Heros');
   }
 
   AddNewHero(newHero: FormData) {
-    return this.http.post(this.baseApiUrl + '/api/Heros', newHero);
+    return this.http.post(this.baseUrl + '/api/Heros', newHero);
   }
 
   updateHero(id: string, newHeroDetails: FormData): Observable<hero> {
     return this.http.put<hero>(
-      this.baseApiUrl + '/api/Heros/' + id,
+      this.baseUrl + '/api/Heros/' + id,
       newHeroDetails
     );
   }
 
   deleteHero(id: string) {
-    return this.http.delete(this.baseApiUrl + '/api/Heros/' + id);
+    return this.http.delete(this.baseUrl + '/api/Heros/' + id);
   }
 
   searchForHero(heroName: string): Observable<hero[]> {
-    return this.http.get<hero[]>(this.baseApiUrl + '/api/Heros/' + heroName);
+    return this.http.get<hero[]>(this.baseUrl + '/api/Heros/' + heroName);
   }
 
   uploadImage(Image: FormData) {
-    return this.http.post(this.baseApiUrl + '/api/Heros/uploadImage', Image);
+    return this.http.post(this.baseUrl + '/api/Heros/uploadImage', Image);
   }
 }
